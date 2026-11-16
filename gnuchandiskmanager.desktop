@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=GnuChan Disk Manager
+GenericName=Partition Editor
+Comment=Inspect disks, manage partitions, and format filesystems
+Exec=GnuChanDiskManager
+Icon=drive-harddisk
+Terminal=false
+Categories=System;Settings;HardwareSettings;
+StartupNotify=true

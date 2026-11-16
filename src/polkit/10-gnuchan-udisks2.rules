@@ -1,0 +1,18 @@
+/* GnuChanDiskManager polkit rule: allow sudo group members to mount
+   and manage filesystems via udisks2 without an extra password prompt.
+   This is needed for non-removable (system) devices such as internal SSDs. */
+
+polkit.addRule(function(action, subject) {
+    var actions = [
+        "org.freedesktop.udisks2.filesystem-mount",
+        "org.freedesktop.udisks2.filesystem-mount-system",
+        "org.freedesktop.udisks2.filesystem-mount-other-seat",
+        "org.freedesktop.udisks2.filesystem-take-ownership",
+        "org.freedesktop.udisks2.filesystem-unmount-others",
+        "org.freedesktop.udisks2.modify-device-system",
+        "org.freedesktop.udisks2.eject-media-system"
+    ];
+    if (actions.indexOf(action.id) >= 0 && subject.isInGroup("sudo")) {
+        return polkit.Result.YES;
+    }
+});
